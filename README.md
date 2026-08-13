@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Digital Trophy MVP
 
 **Online service for digital measurement of hunting trophies from 3D models**
@@ -256,3 +257,6 @@ MVP/
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
+=======
+# MVP
+>>>>>>> 12bffd782dad378c77352c241690b4aac5d2d0b9
