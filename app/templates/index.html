@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Trophy MVP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body { font-family: system-ui, -apple-system, sans-serif; }
+        #viewer { width: 100%; height: 500px; background: #1a1a2e; border-radius: 8px; }
+        .btn { padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+        .btn-primary { background: #3b82f6; color: white; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-secondary { background: #6b7280; color: white; }
+        .card { background: white; border-radius: 8px; border: 1px solid #e5e7eb; padding: 16px; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white border-b px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold">Digital Trophy MVP</h1>
+            <button id="btn-logout" class="btn btn-secondary hidden">Выйти</button>
+        </div>
+    </header>
+    <main class="max-w-7xl mx-auto p-6">
+        <div id="login-section" class="max-w-md mx-auto">
+            <div class="card">
+                <h2 class="text-lg font-semibold mb-4">Вход</h2>
+                <input id="login-email" placeholder="Email" class="w-full mb-2 p-2 border rounded">
+                <input id="login-password" type="password" placeholder="Пароль" class="w-full mb-2 p-2 border rounded">
+                <button id="btn-login" class="btn btn-primary w-full">Войти</button>
+                <p class="mt-2 text-sm text-center">Нет аккаунта? <a href="#" id="show-register">Зарегистрироваться</a></p>
+            </div>
+        </div>
+        <div id="register-section" class="max-w-md mx-auto hidden">
+            <div class="card">
+                <h2 class="text-lg font-semibold mb-4">Регистрация</h2>
+                <input id="reg-username" placeholder="Имя пользователя" class="w-full mb-2 p-2 border rounded">
+                <input id="reg-email" placeholder="Email" class="w-full mb-2 p-2 border rounded">
+                <input id="reg-password" type="password" placeholder="Пароль (min 8 символов)" class="w-full mb-2 p-2 border rounded">
+                <button id="btn-register" class="btn btn-primary w-full">Зарегистрироваться</button>
+                <p class="mt-2 text-sm text-center">Есть аккаунт? <a href="#" id="show-login">Войти</a></p>
+            </div>
+        </div>
+        <div id="trophies-section" class="hidden">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="text-lg font-semibold">Мои трофеи</h2>
+                <button id="btn-new-trophy" class="btn btn-primary">+ Новый трофей</button>
+            </div>
+            <div id="trophies-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+        </div>
+        <div id="trophy-detail" class="hidden space-y-4">
+            <button id="btn-back" class="btn btn-secondary">← Назад</button>
+            <div class="flex items-center gap-4">
+                <h2 id="trophy-name" class="text-lg font-semibold"></h2>
+                <span id="trophy-status" class="badge"></span>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-2">
+                    <div class="card">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3>3D Модель</h3>
+                            <div class="flex gap-2">
+                                <button id="btn-wireframe" class="btn btn-secondary text-sm">Wireframe</button>
+                                <button id="btn-reset-camera" class="btn btn-secondary text-sm">Сброс</button>
+                            </div>
+                        </div>
+                        <input id="file-input" type="file" accept=".stl" class="mb-4">
+                        <div id="viewer"></div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="card">
+                        <h3 class="font-semibold mb-3">Измерения</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between"><span>Длина:</span><span id="result-length">-</span></div>
+                            <div class="flex justify-between"><span>Ширина:</span><span id="result-width">-</span></div>
+                            <div class="flex justify-between border-t pt-2"><span class="font-bold">Итог:</span><span id="result-total" class="font-bold text-lg">-</span></div>
+                        </div>
+                    </div>
+                    <div class="card space-y-2">
+                        <button id="btn-save" class="btn btn-primary w-full">Сохранить черновик</button>
+                        <button id="btn-submit" class="btn btn-success w-full">Отправить на проверку</button>
+                        <button id="btn-pdf" class="btn btn-secondary w-full">Скачать PDF</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
